@@ -1,8 +1,8 @@
-#include <motor_control.h>
-#include <HC_SR04.h>
-#include <SODAR.h>
-#include <PID_v1.h>
-#include <MPU6050.h>
+#include <arduino_code\libraries\motor_control\motor_control.h>
+#include <arduino_code\libraries\HC_SR04\HC_SR04.h>
+#include <arduino_code\libraries\SODAR\SODAR.h>
+#include <arduino_code\libraries\PID\PID_v1.h>
+#include <arduino_code\libraries\MPU6050\MPU6050.h>
 
  
 
@@ -31,6 +31,7 @@ SODAR group7Sodar(TRIG_PIN, ECHO_PIN, ECHO_INT, SERVO_PIN, 91, RESOLUTION, UPPER
 double input, output;
 double setpoint=0;
 int power = 120;//power to the robot
+//i found that it worked best at 120. 150 was a little too fast for the distance sensor to pick what it needed to up on all sides
 
  
 
@@ -46,14 +47,14 @@ MPU6050 IMU(4, 5);
  
 
 
-int rwc = 150;
+//int rwc = 150;
 int turnTime = 5;
 
  
 
 void setup()
 {
- motor_setup();//setup motor pins
+  motor_setup();//setup motor pins
   IMU.initialize();//initialize MPU6050 sensor
   delay(500); //Add delay so finger press on reset button does not mess up calibration
   IMU.calibrate();  //calibrate the sensor(robot cannot move during this time)
